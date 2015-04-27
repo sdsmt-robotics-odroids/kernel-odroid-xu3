@@ -770,8 +770,8 @@ ApplyPatch()
   if [ ! -f $RPM_SOURCE_DIR/$patch ]; then
     exit 1
   fi
-  echo "Looking at %{_specdir}/${RPM_PACKAGE_NAME%%%%%{?variant}}.spec"
-  if ! grep -E "^Patch[0-9]+: $patch\$" %{_specdir}/${RPM_PACKAGE_NAME%%%%%{?variant}}.spec ; then
+  echo "Looking at %{_specdir}/${RPM_PACKAGE_NAME}.spec"
+  if ! grep -E "^Patch[0-9]+: $patch\$" %{_specdir}/${RPM_PACKAGE_NAME}.spec ; then
     if [ "${patch:0:8}" != "patch-3." ] ; then
       echo "ERROR: Patch  $patch  not listed as a source patch in specfile"
       exit 1
