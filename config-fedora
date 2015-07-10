@@ -26,3 +26,6 @@ CONFIG_SCHEDSTATS=y
 # CONFIG_WIMAX_I2400M is not set
 # CONFIG_USB_MIDI_GADGET is not set
 # CONFIG_USB_G_WEBCAM is not set
+
+# Disabled due to gcc5 errors
+# CONFIG_RTL8192CU_V40 is not set
