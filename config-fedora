@@ -27,5 +27,11 @@ CONFIG_SCHEDSTATS=y
 # CONFIG_USB_MIDI_GADGET is not set
 # CONFIG_USB_G_WEBCAM is not set
 
+# CONFIG_BACKPORT_CFG80211 is not set
+# CONFIG_RTL8192DU is not set
+
 # Disabled due to gcc5 errors
 # CONFIG_RTL8192CU_V40 is not set
+
+# Missing from odroidxu3_defconfig
+# CONFIG_AUFS_FS is not set

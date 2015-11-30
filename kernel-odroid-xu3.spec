@@ -1,4 +1,4 @@
-%global commit e9d7edb13625ebb33a130720c3803c2f1a90719a
+%global commit 8475a30f84c3cb15192aa19dc3b21fe5e124c51c
 %define variant -odroid-xu3
 %define _without_pae 1
 
@@ -30,7 +30,7 @@ Summary: The Linux kernel
 # For non-released -rc kernels, this will be appended after the rcX and
 # gitX tags, so a 3 here would become part of release "0.rcX.gitX.3"
 #
-%global baserelease 5
+%global baserelease 18
 %global fedora_build %{baserelease}
 
 # base_sublevel is the kernel version we're starting with and patching
@@ -42,7 +42,7 @@ Summary: The Linux kernel
 %if 0%{?released_kernel}
 
 # Do we have a -stable update to apply?
-%define stable_update 72
+%define stable_update 92
 # Set rpm version accordingly
 %if 0%{?stable_update}
 %define stablerev %{stable_update}
@@ -461,13 +461,6 @@ Requires: gzip binutils
 Kernel-bootwrapper contains the wrapper code which makes bootable "zImage"
 files combining both kernel and initial ramdisk.
 
-%package debuginfo-common-%{_target_cpu}
-Summary: Kernel source files used by %{name}-debuginfo packages
-Group: Development/Debug
-%description debuginfo-common-%{_target_cpu}
-This package is required by %{name}-debuginfo subpackages.
-It provides the kernel source files common to all builds.
-
 %if %{with_perf}
 %package -n perf
 Summary: Performance monitoring for the Linux kernel
@@ -480,7 +473,6 @@ of the Linux kernel.
 %package -n perf-debuginfo
 Summary: Debug information for package perf
 Group: Development/Debug
-Requires: %{name}-debuginfo-common-%{_target_cpu} = %{version}-%{release}
 AutoReqProv: no
 %description -n perf-debuginfo
 This package provides debug information for the perf package.
@@ -504,7 +496,6 @@ to manipulate perf events.
 %package -n python-perf-debuginfo
 Summary: Debug information for package perf python bindings
 Group: Development/Debug
-Requires: %{name}-debuginfo-common-%{_target_cpu} = %{version}-%{release}
 AutoReqProv: no
 %description -n python-perf-debuginfo
 This package provides debug information for the perf python bindings.
@@ -556,7 +547,6 @@ the kernel source.
 %package -n kernel-tools-debuginfo
 Summary: Debug information for package kernel-tools
 Group: Development/Debug
-Requires: %{name}-debuginfo-common-%{_target_cpu} = %{version}-%{release}
 AutoReqProv: no
 %description -n kernel-tools-debuginfo
 This package provides debug information for package kernel-tools.
@@ -578,7 +568,6 @@ This package provides debug information for package kernel-tools.
 %package %{?1:%{1}-}debuginfo\
 Summary: Debug information for package %{name}%{?1:-%{1}}\
 Group: Development/Debug\
-Requires: %{name}-debuginfo-common-%{_target_cpu} = %{version}-%{release}\
 Provides: %{name}%{?1:-%{1}}-debuginfo-%{_target_cpu} = %{version}-%{release}\
 AutoReqProv: no\
 %description -n %{name}%{?1:-%{1}}-debuginfo\
@@ -1499,8 +1488,6 @@ popd
 
 %ifnarch noarch
 %global __debug_package 1
-%files -f debugfiles.list debuginfo-common-%{_target_cpu}
-%defattr(-,root,root)
 %endif
 
 %endif
@@ -1844,6 +1831,10 @@ fi
 #                                    ||----w |
 #                                    ||     ||
 %changelog
+* Sun Nov 29 2015 Scott K Logan <logans@cottsay.net> - 3.10.92-18
+- Update to version 3.10.92-18
+- Remove debuginfo-common package because it is empty
+
 * Tue Apr 07 2015 Scott K Logan <logans@cottsay.net> - 3.10.72-5
 - Adapted kernel RPM from Fedora's kernel-3.18.5-201
 ###
